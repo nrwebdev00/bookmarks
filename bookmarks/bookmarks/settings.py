@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 
     # Apps
     'account',
+    'images',
 ]
 
 MIDDLEWARE = [
