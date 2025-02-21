@@ -14,9 +14,9 @@
         {% if request.user.is_authenticated %}
             <ul class="menu">
                 <li {% if section == "dashbaord" %}class="selected"{% endif %}>
-                    <a href="{% url 'dashboard' %}">My Dashboard</a>
+                    <a href="{% url 'dashboard' %} ">My Dashboard</a>
                 </li>
-                <li {% if section == 'images' %}class="selected"{% endif %}>
+                <li>
                     <a href="{% url 'images' }">Images</a>
                 </li>
                 <li {% if section == 'people' %}class="selected"{% endif %}>
@@ -27,7 +27,7 @@
         <span class="user">
             {% if request.user.is_authenticated %}
                 Hello {{ request.user.first_name|default:request.user.username }},
-                <form action="{% url 'logout' %}">
+                <form action="{% url 'logout' %}" method="post">
                     <button type="submit">Logout</button>
                     {% csrf_token %}
                 </form>
@@ -36,6 +36,16 @@
             {% endif %}
         </span>
     </div>
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">
+            {{ message|safe }}
+            <a href="#" class="close">x</a>
+            </li>
+        {% endfor %}
+        </ul>
+  {% endif %}
     <div id="content">
         {% block content %}
     
